@@ -13,6 +13,7 @@ def low_sodium_hasher(init_data: DataFrame) -> list[str]:
         hashed_str = sha256(unhashed_str.encode('utf-8')).hexdigest()
         hashes.append(hashed_str)
     return hashes
+
 def salty_hasher(init_data: DataFrame) -> list[str]:
     salty_hashes = list[str]()
     for i in range(0, len(init_data)):
@@ -23,6 +24,7 @@ def salty_hasher(init_data: DataFrame) -> list[str]:
         salted_str = salt + hashed_str
         salty_hashes.append(salted_str)
     return salty_hashes
+
 def pour_the_salt(salt_length: 5) -> str:
     character_selection = ascii_letters + digits
     salt_str = ""
