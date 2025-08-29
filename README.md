@@ -42,11 +42,14 @@ Answer the following:
 hash)
 
 ```
-
+00003a51ae2b0314b9dfb4509a0bd1d45bdef56816bf121b1c5eebd16e108cfc - 762precertified
+00000c0f29545aba6a94339ac99574703ba6102fdf38950facb5dfb8da3a969b - 289sandling
 ```
 
 * How many words were in your dictionary?
+> 37105
 * How many nonces did your code iterate over?
+>
 * What was the maximum number of hashes your code *could* compute given the above?
 * What did you think about Task 2?
 * Is there a better way than brute force to attempt to get higher valued coins?
