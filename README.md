@@ -49,12 +49,14 @@ hash)
 * How many words were in your dictionary?
 > 37105
 * How many nonces did your code iterate over?
->
+> 37105 (statistically unique for each word)
 * What was the maximum number of hashes your code *could* compute given the above?
+> 37105^2 = 1,376,781,025
 * What did you think about Task 2?
+> It gave me a better idea of what mining crypto-tokens involved. I wrote the python scripts because I thought it would be fun, and it really was.
 * Is there a better way than brute force to attempt to get higher valued coins?
 * Why or why not?
-
+> If there was a way to tell which hashes had already been computed, you could perhaps just make the hashes with a ton of zeroes. However this would not be feasible at large scale, and you would not be able to find the original unhashed string. Therefore, I would say not.
 
 ```bash
 please put any cool bash one-liners or other piped commands you
