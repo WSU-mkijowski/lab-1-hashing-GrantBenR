@@ -1,4 +1,5 @@
 NONCE_LENGTH=5
+NONCE_STRING=""
 IN_PATH="./data/quiz_data.csv"
 OUT_PATH="./data/salted-data2.csv"
 
@@ -12,16 +13,19 @@ while [[ "$IS_VALID" -eq 0 ]]; do
     IS_VALID=1
   fi
 done
-
+COUNT=0
 while read FLastName Attempt_Num Attempt_Start Attempt_End Section_Num Q_Num Q_Type Q_Title Q_Text Bonus Difficulty Answer Answer_Match Score_Out_Of; do
-  # Generate a Number Nonce of length NONCE_LENGTH
-  NONCE_MAX=$(( 10**$NONCE_LENGTH ))
-  NONCE=$(( RANDOM % $NONCE_MAX + 1 ))
-  NONCE_STR=$(( printf $NONCE ))
-  UNHASHED_TERM="${NONCE_STR}${FLastName}"
-  HASHED_TERM=$(( printf $UNHASHED_TERM | sha256sum ))
-  # printf "${HASHED_TERM} - ${UNHASHED_TERM}" >> $OUT_PATH
-  printf "${HASHED_TERM},${Attempt_Num},${Attempt_Start},${Attempt_End},${Section_Num},${Q_Num},${Q_Type},${Q_Title},${Q_Text},${Bonus},${Difficulty},${Answer},${Answer_Match},${Score_Out_Of}" >> $OUT_PATH
-done < $IN_PATH
+  if [[ "$COUNT" != 0 ]]; then
+    # Generate a Number Nonce of length NONCE_LENGTH
+    NONCE_MAX=$(( 10**$NONCE_LENGTH ))
+    NONCE=$(( RANDOM % $NONCE_MAX + 1 ))
+    printf -v NONCE_STR "%d" "$NONCE"
+    UNHASHED_TERM="${NONCE_STR}${FLastName}"
+    printf -v HASHED_TERM "$UNHASHED_TERM" | sha256sum ))
+    # printf "${HASHED_TERM} - ${UNHASHED_TERM}" >> $OUT_PATH
+    printf "${HASHED_TERM},${Attempt_Num},${Attempt_Start},${Attempt_End},${Section_Num},${Q_Num},${Q_Type},${Q_Title},${Q_Text},${Bonus},${Difficulty},${Answer},${Answer_Match},${Score_Out_Of}" >> $OUT_PATH
+  fi
+  COUNT=$(( $COUNT + 1 ))
+done < "$IN_PATH"
 
   
