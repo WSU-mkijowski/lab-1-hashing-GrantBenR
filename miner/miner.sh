@@ -7,7 +7,7 @@ NONCE_LENGTH=0
 DICT_PATH="../data/words_alpha.csv"
 OUT_PATH="./bash_hashes.csv"
 # Get a valid input for the number of valid hashes to look for
-while [[ $IS_VALID eq 0 ]]; do
+while [[ "$IS_VALID" -eq 0 ]]; do
   read -p "How many valid hashes to get?: " HASHES_TO_GET
   if [[ ! "$HASHES_TO_GET" =~ ^-?[0-9]+$ ]]; then
     echo "Invalid input: Please enter an integer."
@@ -18,7 +18,7 @@ while [[ $IS_VALID eq 0 ]]; do
 done
 
 # Get a valid number of zeroes to look for
-while [[ $IS_VALID eq 0 ]]; do
+while [[ "$IS_VALID" -eq 0 ]]; do
   read -p "How many leading zeroes?: " ZEROES
   if [[ ! "$ZEROES" =~ ^-?[0-9]+$ ]]; then
     echo "Invalid input: Please enter an integer."
@@ -29,7 +29,7 @@ while [[ $IS_VALID eq 0 ]]; do
 done
 
 # Get a valid nonce length
-while [[ $IS_VALID eq 0 ]]; do
+while [[ "$IS_VALID" -eq 0 ]]; do
   read -p "How long should the nonce be?: " NONCE_LENGTH
   if [[ ! "$NONCE_LENGTH" =~ ^-?[0-9]+$ ]]; then
     echo "Invalid input: Please enter an integer."
@@ -39,7 +39,7 @@ while [[ $IS_VALID eq 0 ]]; do
   fi
 done
 
-while [[ $COLLECTED_HASHES_COUNT lt $HASHES_TO_GET ]]; do
+while [[ "$COLLECTED_HASHES_COUNT" -lt "$HASHES_TO_GET" ]]; do
   # Iterate over dictionary terms
   for DICT_TERM in $(cat $DICT_PATH); do
     printf $DICT_TERM
@@ -52,14 +52,14 @@ while [[ $COLLECTED_HASHES_COUNT lt $HASHES_TO_GET ]]; do
     DIGIT_INDEX=0
     IS_VALID=1
     # Check digits until you hit the target number of digits ZEROES
-    while [[ $DIGIT_INDEX lt $ZEROES ]]: do
+    while [[ "$DIGIT_INDEX" -lt "$ZEROES" ]]: do
       NEXT_DIGIT_INDEX=$(( $DIGIT_INDEX + 1 ))
 
-      if [[ "{$HASHED_TERM:$DIGIT_INDEX:$NEXT_DIGIT_INDEX}" eq "0" ]]; then
+      if [[ "{$HASHED_TERM:$DIGIT_INDEX:$NEXT_DIGIT_INDEX}" -eq "0" ]]; then
         IS_VALID=1
       else
         IS_VALID=0
-      if [[ $IS_VALID ]]; then
+      if [[ "$IS_VALID" ]]; then
         # Update the count and list of valid hashes
         COLLECTED_HASHES_COUNT=$(($COLLECTED_HASHES_COUNT + 1))
         printf "${HASHED_TERM} - ${UNHASHED_TERM}" >> $OUT_PATH

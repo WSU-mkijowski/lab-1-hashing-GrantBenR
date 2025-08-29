@@ -3,7 +3,7 @@ IN_PATH="./data/quiz_data.csv"
 OUT_PATH="./data/salted-data2.csv"
 
 # Get a valid nonce length
-while [[ $IS_VALID eq 0 ]]; do
+while [[ "$IS_VALID" -eq 0 ]]; do
   read -p "How long should the nonce be?: " NONCE_LENGTH
   if [[ ! "$NONCE_LENGTH" =~ ^-?[0-9]+$ ]]; then
     echo "Invalid input: Please enter an integer."
