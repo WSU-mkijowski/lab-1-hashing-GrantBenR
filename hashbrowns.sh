@@ -22,7 +22,7 @@ while read FLastName Attempt_Num Attempt_Start Attempt_End Section_Num Q_Num Q_T
     NONCE_STR=$(( "$NONCE" ))
     UNHASHED_TERM="${NONCE_STR}${FLastName}"
     HASHED_TERM=$( printf "%s" "$UNHASHED_TERM" | sha256sum | awk '{print $1}' )
-    printf "\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"\n" "$HASHED_TERM" "$Attempt_Num" "$Attempt_Start" "$Attempt_End" "$Section_Num" "$Q_Num" "$Q_Type" "$Q_Title" "$Q_Text" "$Bonus" "$Difficulty" "$Answer" "$Answer_Match" "$Score_Out_Of" >> "$OUT_PATH"
+    printf "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" "$HASHED_TERM" "$Attempt_Num" "$Attempt_Start" "$Attempt_End" "$Section_Num" "$Q_Num" "$Q_Type" "$Q_Title" "$Q_Text" "$Bonus" "$Difficulty" "$Answer" "$Answer_Match" "$Score_Out_Of" >> "$OUT_PATH"
   fi
   COUNT=$(( $COUNT + 1 ))
 done < "$IN_PATH"
