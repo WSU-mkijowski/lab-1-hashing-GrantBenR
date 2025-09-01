@@ -20,10 +20,9 @@ while read FLastName Attempt_Num Attempt_Start Attempt_End Section_Num Q_Num Q_T
     NONCE_MAX=$(( 10**$NONCE_LENGTH ))
     NONCE=$(( RANDOM % $NONCE_MAX + 1 ))
     NONCE_STR=$(( "$NONCE" ))
-    UNHASHED_TERM="${NONCE_STR}${FLastName}"
+    UNHASHED_TERM="${NONCE_STR${FLastName"
     HASHED_TERM=$( printf "%s" "$UNHASHED_TERM" | sha256sum )
-    # printf "${HASHED_TERM} - ${UNHASHED_TERM}" >> $OUT_PATH
-    printf "${HASHED_TERM},${Attempt_Num},${Attempt_Start},${Attempt_End},${Section_Num},${Q_Num},${Q_Type},${Q_Title},${Q_Text},${Bonus},${Difficulty},${Answer},${Answer_Match},${Score_Out_Of}" >> $OUT_PATH
+    printf "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s" "$HASHED_TERM" "$Attempt_Num" "$Attempt_Start" "$Attempt_End" "$Section_Num" "$Q_Num" "$Q_Type" "$Q_Title" "$Q_Text" "$Bonus" "$Difficulty" "$Answer" "$Answer_Match" "$Score_Out_Of" >> $OUT_PATH
   fi
   COUNT=$(( $COUNT + 1 ))
 done < "$IN_PATH"
