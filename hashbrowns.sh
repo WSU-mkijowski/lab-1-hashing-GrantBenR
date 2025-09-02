@@ -14,6 +14,10 @@ while [[ "$IS_VALID" -eq 0 ]]; do
   fi
 done
 COUNT=0
+# Clear the output file
+printf "" > "$OUT_PATH"
+# Print the column headers to out file
+printf "FLastName, Attempt #,Attempt Start,Attempt End,Section #,Q #,Q Type,Q Title,Q Text,Bonus?,Difficulty,Answer,Answer Match,Score,Out Of" >> "$OUT_PATH"
 while read FLastName Attempt_Num Attempt_Start Attempt_End Section_Num Q_Num Q_Type Q_Title Q_Text Bonus Difficulty Answer Answer_Match Score_Out_Of; do
   if [[ "$COUNT" != 0 ]]; then
     # Generate a Number Nonce of length NONCE_LENGTH
@@ -22,9 +26,8 @@ while read FLastName Attempt_Num Attempt_Start Attempt_End Section_Num Q_Num Q_T
     NONCE_STR=$(( "$NONCE" ))
     UNHASHED_TERM="${NONCE_STR}${FLastName}"
     HASHED_TERM=$( printf "%s" "$UNHASHED_TERM" | sha256sum | awk '{print $1}' )
+    # Append to output file
     printf "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n" "$HASHED_TERM" "$Attempt_Num" "$Attempt_Start" "$Attempt_End" "$Section_Num" "$Q_Num" "$Q_Type" "$Q_Title" "$Q_Text" "$Bonus" "$Difficulty" "$Answer" "$Answer_Match" "$Score_Out_Of" >> "$OUT_PATH"
   fi
   COUNT=$(( $COUNT + 1 ))
 done < "$IN_PATH"
-
-  
