@@ -2,7 +2,7 @@ NONCE_LENGTH=5
 NONCE_STRING=""
 IN_PATH="./data/quiz_data.csv"
 OUT_PATH="./data/salted-data2.csv"
-SOLUTION_PATH="./data/salted-data2-solution.csv"
+SOLUTION_PATH="./data/salted_data_solutions/salted-data2-solution.csv"
 # Get a valid nonce length
 while [[ "$IS_VALID" -eq 0 ]]; do
   read -p "How long should the nonce be?: " NONCE_LENGTH
