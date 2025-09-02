@@ -12,17 +12,17 @@ Answer the following in this file:
 * How many unique users are in the data?
 > 43
 * How many salts did you create?
-> 1302 unique 5 digit numbers
+> 1302 unique 5 digit numbers (my python script uses letters so is much higher)
 * How many possible combinations will I need to try to figure out the secret ID
   of all students (assume I know all potential secret IDs and have your 
   `salted-data.csv`)
 > 1302^2 = 1,695,204
 * Instead of salts, if you were to use a nonce (unique number for each hashed
   field) how many possible combinations would I need to try?
-> For a 5 digit nonce as I used, there would be 
+> For a 5 digit numeric nonce as I used, there would be again 1695204 possible combinations
 * Given the above, if this quiz data were *actual* class data, say for example
   your final exam, how would you store this dataset?  Why?
->
+> I would just encrypt the full file or I would do a similar method of hashing with salts with k
 
 ```bash
 #Get Unique Users
@@ -53,13 +53,11 @@ hash)
 * What was the maximum number of hashes your code *could* compute given the above?
 > 37105^2 = 1,376,781,025
 * What did you think about Task 2?
-> It gave me a better idea of what mining crypto-tokens involved. I wrote the python scripts because I thought it would be fun, and it really was.
+> It gave me a better idea of what mining crypto-tokens involved. I wrote the python scripts because I thought it would be fun, and it definitely was more fun than writing in bash.
 * Is there a better way than brute force to attempt to get higher valued coins?
 * Why or why not?
 > If there was a way to tell which hashes had already been computed, you could perhaps just make the hashes with a ton of zeroes. However this would not be feasible at large scale, and you would not be able to find the original unhashed string. Therefore, I would say not.
 
-```bash
-please put any cool bash one-liners or other piped commands you
-learned/struggled with for task 2 here
-```
+### Commands, Learning Experiences
+> I realized you cannot put `printf` within `$(())` and must use `$()`, otherwise my bash code sucks.
 
