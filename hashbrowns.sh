@@ -35,7 +35,7 @@ printf "" > "$SOLUTION_PATH"
 #   fi
 #   COUNT=$(( $COUNT + 1 ))
 # done < "$IN_PATH"
-awk -F',' '{print $1}' quiz_data.csv | sort -u > "$TEMP_PATH"
+awk -F',' '{print $1}' "$IN_PATH" | sort -u > "$TEMP_PATH"
 printf "" > "$OUT_PATH"
 while read FLastName; do
   if [[ "$COUNT" != 0 ]]; then
@@ -46,8 +46,8 @@ while read FLastName; do
     UNHASHED_TERM="${NONCE_STR}${FLastName}"
     HASHED_TERM=$( printf "%s" "$UNHASHED_TERM" | sha256sum | awk '{print $1}' )
     # Append to output file
-    printf "%s\n" "$HASHED_TERM" >> "$OUT_PATH"
+    printf "%s\n" "${HASHED_TERM} - ${UNHASHED_TERM}" >> "$OUT_PATH"
   fi
   COUNT=$(( $COUNT + 1 ))
-done < "$IN_PATH"
+done < "$TEMP_PATH"
 rm "$TEMP_PATH"
